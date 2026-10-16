@@ -4,21 +4,65 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Templo Escola Casa de Malandro</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-slate-950 text-white min-h-screen flex flex-col items-center justify-center p-4">
     
-    <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-8 max-w-lg w-full shadow-2xl text-center">
-      <div class="inline-block p-3 bg-amber-500/10 rounded-full mb-4 text-amber-400 font-bold text-2xl">
-        🎩
-      </div>
-      <h1 class="text-3xl font-bold text-amber-400 mb-2">Templo Escola Casa de Malandro</h1>
-      <p class="text-slate-300 mb-6">O portal do nosso Templo está no ar!</p>
-      
-      <div class="bg-emerald-950/60 border border-emerald-500/40 rounded-xl p-4 text-emerald-300 text-sm font-medium">
-        Servidor Vercel a funcionar em pleno ⚡
-      </div>
+    <!-- Design Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Mapeamento para o navegador entender as bibliotecas do teu App.jsx -->
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18.2.0",
+          "react-dom": "https://esm.sh/react-dom@18.2.0",
+          "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+          "lucide-react": "https://esm.sh/lucide-react@0.263.1",
+          "firebase/app": "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js",
+          "firebase/firestore": "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js",
+          "firebase/auth": "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js",
+          "firebase/storage": "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js"
+        }
+      }
+    </script>
+    
+    <!-- Tradutor de código React para o navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body class="bg-slate-950 text-white min-h-screen">
+    
+    <div id="root">
+        <!-- Ecrã de carregamento enquanto puxa o teu App.jsx -->
+        <div style="display:flex; justify-content:center; align-items:center; height:100vh; flex-direction:column;">
+            <div style="font-size: 3rem; margin-bottom: 1rem; animation: pulse 2s infinite;">🎩</div>
+            <h2 style="font-family: sans-serif; color: #fbbf24;">A puxar o sistema do Templo...</h2>
+        </div>
     </div>
 
+    <!-- Script inteligente que vai buscar o teu App.jsx e o executa -->
+    <script type="module">
+      fetch('./App.jsx')
+        .then(resposta => {
+          if (!resposta.ok) throw new Error("Ficheiro App.jsx não encontrado");
+          return resposta.text();
+        })
+        .then(codigoJsx => {
+          // Garante que a função de desenhar a interface está presente
+          if (!codigoJsx.includes('createRoot')) {
+            codigoJsx += `\n\nimport { createRoot } from 'react-dom/client';\nconst root = createRoot(document.getElementById('root'));\nroot.render(<App />);`;
+          }
+          
+          // Traduz o código
+          const codigoJs = Babel.transform(codigoJsx, { presets: ['react'] }).code;
+          
+          // Injeta e arranca com o teu aplicativo verdadeiro
+          const script = document.createElement('script');
+          script.type = 'module';
+          script.innerHTML = codigoJs;
+          document.body.appendChild(script);
+        })
+        .catch(erro => {
+          document.getElementById('root').innerHTML = '<h2 style="color:red; text-align:center; padding:20px;">Erro: Não foi possível carregar o App.jsx.</h2>';
+          console.error(erro);
+        });
+    </script>
   </body>
 </html>
