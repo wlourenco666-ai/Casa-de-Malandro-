@@ -4,63 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Templo Escola Casa de Malandro</title>
-    <!-- Tailwind CSS para o design -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Import Map para o navegador reconhecer os módulos do React e Firebase -->
-    <script type="importmap">
-      {
-        "imports": {
-          "react": "https://esm.sh/react@18",
-          "react-dom": "https://esm.sh/react-dom@18",
-          "firebase/app": "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js",
-          "firebase/firestore": "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js",
-          "firebase/auth": "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"
-        }
-      }
-    </script>
-    <!-- Babel para compilar o código React no navegador -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
-  <body class="bg-gray-900 text-white min-h-screen">
-    <div id="root"></div>
+  <body class="bg-slate-950 text-white min-h-screen flex flex-col items-center justify-center p-4">
+    
+    <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-8 max-w-lg w-full shadow-2xl text-center">
+      <div class="inline-block p-3 bg-amber-500/10 rounded-full mb-4 text-amber-400 font-bold text-2xl">
+        🎩
+      </div>
+      <h1 class="text-3xl font-bold text-amber-400 mb-2">Templo Escola Casa de Malandro</h1>
+      <p class="text-slate-300 mb-6">O portal do nosso Templo está no ar!</p>
+      
+      <div class="bg-emerald-950/60 border border-emerald-500/40 rounded-xl p-4 text-emerald-300 text-sm font-medium">
+        Servidor Vercel a funcionar em pleno ⚡
+      </div>
+    </div>
 
-    <!-- Script principal do aplicativo integrado -->
-    <script type="text/babel" data-type="module">
-      import React, { useState, useEffect } from "react";
-      import { createRoot } from "react-dom/client";
-      import { initializeApp } from "firebase/app";
-      import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore";
-
-      // Configuração do Firebase do seu projeto
-      const firebaseConfig = {
-        apiKey: "AIzaSyD5R9W0S7...", // Substitua se necessário com a sua chave original do App.jsx
-        authDomain: "casa-de-malandro.firebaseapp.com",
-        projectId: "casa-de-malandro",
-        storageBucket: "casa-de-malandro.appspot.com",
-        messagingSenderId: "884828792946",
-        appId: "1:884828792946:web:bbcf27d2a866b8fb71536b",
-        measurementId: "G-D5RS99W0S7"
-      };
-
-      const app = initializeApp(firebaseConfig);
-      const db = getFirestore(app);
-
-      function App() {
-        return (
-          <div className="flex flex-col items-center justify-center min-h-screen p-4">
-            <div className="bg-gray-800 border border-amber-600/50 rounded-2xl p-8 max-w-md w-full shadow-2xl text-center">
-              <h1 className="text-2xl font-bold text-amber-500 mb-4">Templo Escola Casa de Malandro</h1>
-              <p className="text-gray-300 mb-6">Aplicação ligada com sucesso ao Firebase e pronta a funcionar!</p>
-              <div className="bg-emerald-900/40 border border-emerald-500/50 rounded-lg p-3 text-emerald-400 text-sm">
-                Ligação estabelecida com o sistema ⚡
-              </div>
-            </div>
-          </div>
-        );
-      }
-
-      const root = createRoot(document.getElementById("root"));
-      root.render(<App />);
-    </script>
   </body>
 </html>
