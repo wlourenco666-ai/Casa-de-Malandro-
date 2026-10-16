@@ -4,9 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Templo Escola Casa de Malandro</title>
+    <!-- Tailwind CSS para o design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React e ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel para compilar JSX no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
-  <body>
+  <body class="bg-gray-900 text-white">
     <div id="root"></div>
-    <script type="module" src="/App.jsx"></script>
+
+    <!-- Importação do seu código App.jsx compilado em tempo de execução -->
+    <script type="text/babel" data-type="module" src="./App.jsx"></script>
   </body>
 </html>
